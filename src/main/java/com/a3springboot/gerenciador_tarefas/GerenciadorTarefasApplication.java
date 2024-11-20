@@ -2,6 +2,8 @@ package com.a3springboot.gerenciador_tarefas;
 
 import com.a3springboot.gerenciador_tarefas.entities.TarefaEntities;
 import com.a3springboot.gerenciador_tarefas.services.TarefaService;
+import com.a3springboot.gerenciador_tarefas.services.TarefaService.TarefaFormatter;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.boot.CommandLineRunner; 
 import org.springframework.boot.SpringApplication; 
@@ -21,7 +23,7 @@ public class GerenciadorTarefasApplication implements CommandLineRunner {
             public void run(String... args) {
                 Scanner sc = new Scanner(System.in);
                 String escolha = "";
-                
+
                 while (!escolha.equals("7")) {
                     System.out.println("""
 
@@ -42,30 +44,44 @@ public class GerenciadorTarefasApplication implements CommandLineRunner {
                     switch (escolha) {
                         case "1":  // Opção "Adicionar"
                             System.out.print("Digite o nome da tarefa: ");
-                            String NomeTarefa = sc.nextLine();
-                            tarefaService.adicionar(new TarefaEntities(NomeTarefa, 1));
-                            System.out.print("Tarefa adicionada!");
+                            String nomeTarefa = sc.nextLine();
+                            tarefaService.adicionar(new TarefaEntities(nomeTarefa, 1));
+                            System.out.println("Tarefa adicionada!");
                             break;
                         case "2": // Opção "Editar"
                             System.out.print("Digite o ID da tarefa: ");
                             long id = sc.nextLong();
+                            sc.nextLine();
                             System.out.print("Digite o nome da nova tarefa: ");
-                            NomeTarefa = sc.nextLine();
-                            
-                            tarefaService.editar(id);
-                            System.out.print("Tarefa adicionada!");
+                            nomeTarefa = sc.nextLine();
+                            System.out.print("Digite a nova posicao da tarefa: ");
+                            int posicao = sc.nextInt();
+                            sc.nextLine();
+                            tarefaService.editar(id, new TarefaEntities(nomeTarefa, posicao));
+                            System.out.println("Tarefa editada!");
                             break;
                         case "3": // Opção "Remover"
-                            // Função "Remover"
+                            System.out.print("Digite o ID da tarefa: ");
+                            id = sc.nextLong();
+                            sc.nextLine(); 
+                            tarefaService.remover(id);
+                            System.out.print("Tarefa Removida!");
                             break;
                         case "4": // Opção "Visualizar"
-                            // Função "Visualizar"
+                            List <TarefaEntities> tarefas = tarefaService.listar();
+                            TarefaFormatter.imprimirTarefas(tarefas);
                             break;
                         case "5": // Opção "Mover para a Proxima coluna"
-                            // Função "Mover para a Proxima coluna"
+                            System.out.print("Digite o ID da tarefa: ");
+                            id = sc.nextLong();
+                            sc.nextLine();
+                            tarefaService.moverProxima(id);
                             break;
                         case "6": // Opção "Mover para a coluna anterior"
-                            // Função "Mover para a coluna anterior"
+                            System.out.print("Digite o ID da tarefa: ");
+                            id = sc.nextLong();
+                            sc.nextLine();
+                            tarefaService.moverAnterior(id);
                             break;
                         case "7": // Opção "Sair"
                             System.out.println("Processo encerrado!");
@@ -75,5 +91,5 @@ public class GerenciadorTarefasApplication implements CommandLineRunner {
                     }
                 }           
                 sc.close();
-	}
+            }
 }

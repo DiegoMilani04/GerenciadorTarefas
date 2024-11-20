@@ -40,5 +40,10 @@ public class TarefaEntities {
     public void setPosicao(int posicao) {
         this.posicao = posicao;
     }
+
+    @Override
+    public String toString() {
+        return "Id: " + id + ", Descricao: " + descricao + ", Posicao: " + posicao;
+    }
     
 }

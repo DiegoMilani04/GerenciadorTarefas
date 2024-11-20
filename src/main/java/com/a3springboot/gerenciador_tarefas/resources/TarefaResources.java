@@ -1,11 +1,11 @@
-package com.a3springboot.gerenciador_tarefas.resources;
+/*package com.a3springboot.gerenciador_tarefas.resources;
 
 import com.a3springboot.gerenciador_tarefas.entities.TarefaEntities;
 import com.a3springboot.gerenciador_tarefas.repository.TarefaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
-@Service
+@RestController
 public class TarefaResources {
     
     @Autowired
@@ -15,4 +15,4 @@ public class TarefaResources {
         return null;
     } 
     
-}
+}*/

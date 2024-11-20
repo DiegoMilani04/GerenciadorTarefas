@@ -7,6 +7,6 @@ import com.a3springboot.gerenciador_tarefas.entities.TarefaEntities;
 @Repository
 public interface TarefaRepository extends JpaRepository<TarefaEntities, Long> {
     
-    public long update(long id);
+    //public long update(long id, String nomeTarefa);
     
 }
